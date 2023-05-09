@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
 
-    project_name:
-        image: ${PROJECT_NAME_IMAGE_NAME:-project_name}
+    hexagonal_countdown_exercice:
+        image: ${hexagonal_countdown_exercice_IMAGE_NAME:-hexagonal_countdown_exercice}
         build:
             context: .
             dockerfile: Dockerfile
@@ -12,19 +12,19 @@ services:
             - mongo
         stdin_open: true
         tty: true
-        container_name: project_name
+        container_name: hexagonal_countdown_exercice
         environment:
             - DB_USER=mongoadmin
             - DB_PASSWORD=secret
-            - DB_URI=mongodb://mongo:27017/project_name?authSource=admin
+            - DB_URI=mongodb://mongo:27017/hexagonal_countdown_exercice?authSource=admin
             - SUBSCRIPTION_NAME=subscription_name
             - PUBSUB_EMULATOR_HOST=pubsub_emulator:8432
             - PUBSUB_PROJECT_ID=fake_project
 
         volumes:
             - ./:/app
-            - project_name_dist:/app/dist
-            - project_name_node_modules:/app/node_modules
+            - hexagonal_countdown_exercice_dist:/app/dist
+            - hexagonal_countdown_exercice_node_modules:/app/node_modules
         ports:
             - 8080:8080
             - 9229:9229
@@ -61,8 +61,8 @@ services:
 
 
 volumes:
-    project_name_node_modules:
-    project_name_dist:
+    hexagonal_countdown_exercice_node_modules:
+    hexagonal_countdown_exercice_dist:
 networks:
     default:
-        name: project_name-environment-network
+        name: hexagonal_countdown_exercice-environment-network

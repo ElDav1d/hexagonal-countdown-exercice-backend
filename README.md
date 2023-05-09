@@ -9,7 +9,7 @@
 ## Description
 
 - This repository is the seed for the creation of new projects. It was created following the best practices
-and principles of the hexagonal architecture, but with the trazable dev team's flavor.
+  and principles of the hexagonal architecture, but with the trazable dev team's flavor.
 
 ## Trazable Hexagonal Architecture
 
@@ -31,23 +31,23 @@ and principles of the hexagonal architecture, but with the trazable dev team's f
 
 - Download this repository.
 - Remove the existing .git file and create a new one for your project with the following commands:  
-`rm -rf .git`  
-`git init`  
-`git add .`  
-`git commit -m "Initial commit"`
-- Find and change globally `project_name` to the correct project name
+  `rm -rf .git`  
+  `git init`  
+  `git add .`  
+  `git commit -m "Initial commit"`
+- Find and change globally `hexagonal_countdown_exercice` to the correct project name
 - Change in `package.json` the project information (name, description, repository...)
 
 ## Running the application
 
-- Install dependencies:  `npm i`
-- Run the environment with docker-compose:  `docker-compose up`.
+- Install dependencies: `npm i`
+- Run the environment with docker-compose: `docker-compose up`.
   - Services:
-    - project_name: Example application using the trazable hexagonal architecture.
+    - hexagonal_countdown_exercice: Example application using the trazable hexagonal architecture.
       - localhost:8080
-    - project_name_mongo: Mongo DB Database
+    - hexagonal_countdown_exercice_mongo: Mongo DB Database
       - localhost:27017
-    - project_name_mongo_express: Dashboard for Mongo DB
+    - hexagonal_countdown_exercice_mongo_express: Dashboard for Mongo DB
       - localhost:8081
 
 ## How it works
@@ -75,6 +75,7 @@ and principles of the hexagonal architecture, but with the trazable dev team's f
         - The method execute (command pattern) to realize the behavior of the name that has the use-case, in this case `Add` a `Example`.
         - Business says that is not possible to add an Example with the same name. In order to manage this, go to the repository to ask if any `Example` exist with the name received (the input and output of these methods are defined in the interface, MUST return a business entity not a container data). If the name exist, throw a business exception called `NameAlreadyExists` (managing the exception and returning a custom message its responsibility of the primary adapter).
 - Details/Dependencies
+
   - When starting to create the use-case, you need to create the dependencies necessary to call your logic and the dependencies of it.
     - Example: `Add` use case (src/use-cases/add-index.ts)
       - Primary Adapter:
@@ -99,7 +100,7 @@ and principles of the hexagonal architecture, but with the trazable dev team's f
 ### Generic
 
 ### Staging
-  
+
 ### Production
 
 ### Playground
