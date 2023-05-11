@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
     hexagonal_countdown_exercice:
-        image: ${hexagonal_countdown_exercice_IMAGE_NAME:-hexagonal_countdown_exercice}
+        image: ${HEXAGONAL_COUNTDOWN_EXERCICE_IMAGE_NAME:-hexagonal_countdown_exercice}
         build:
             context: .
             dockerfile: Dockerfile
