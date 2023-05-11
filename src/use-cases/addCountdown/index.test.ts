@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import expect from "expect";
 import sinon, { SinonFakeTimers } from "sinon";
-import ExampleDataOutJSON from "../../../__mocks__/countdown/addCountdown/countdown-data-out.json";
+import CountDownDataInJSON from "../../../__mocks__/countdown/addCountdown/countdown-data-in.json";
+import CountDownDataOutJSON from "../../../__mocks__/countdown/addCountdown/countdown-data-out.json";
 import { AddCountdown } from ".";
+import { FakeIdGenerator } from "../../../__mocks__/ports/id-generator";
+import { FakeQueue } from "../../../__mocks__/ports/queue";
 import { FakeLogger } from "../../../__mocks__/ports/logger";
 import { FakeCountdownRepository } from "../../../__mocks__/repositories/countdown.repository";
 
@@ -11,6 +14,7 @@ describe("addCountdown use-case", () => {
   let clock: SinonFakeTimers;
 
   beforeEach(() => {
+    sinon.restore();
     clock = sinon.useFakeTimers(now.getTime());
   });
 
@@ -22,17 +26,21 @@ describe("addCountdown use-case", () => {
     const stubSave = sinon.stub(FakeCountdownRepository.prototype, "save");
 
     sinon.stub(FakeCountdownRepository.prototype, "getAll").resolves();
+    sinon.stub(FakeIdGenerator.prototype, "generate").returns("456");
+    sinon.stub(FakeQueue.prototype, "publish").resolves();
     sinon.stub(FakeLogger.prototype, "info");
 
     const addUseCase = new AddCountdown(
       new FakeCountdownRepository(),
-      new FakeLogger()
+      new FakeLogger(),
+      new FakeIdGenerator(),
+      new FakeQueue()
     );
 
-    const result = await addUseCase.execute();
+    const result = await addUseCase.execute(CountDownDataInJSON);
 
-    expect(result).toStrictEqual({
-      ...ExampleDataOutJSON,
+    expect({ ...result }).toStrictEqual({
+      ...CountDownDataOutJSON,
       date: now,
     });
   });
