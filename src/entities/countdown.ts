@@ -4,7 +4,7 @@ export interface ICountdown {
   date: Date;
 }
 export class Countdown implements ICountdown {
-  _id: string;
+  readonly _id: string;
   name: string;
   date: Date;
 
