@@ -6,9 +6,10 @@ import {
   USE_CASES_LOGGER,
   ID_GENERATOR,
   QUEUE_PUBLISHER,
+  MESSAGE_PUBLISHED_TOPIC,
 } from "../../constants";
 import { IIDGenerator } from "../../ports/id-generator";
-import { IQueue } from "../../ports/queue";
+import { IQueue, MessageAttributeOperation } from "../../ports/queue";
 import { Countdown } from "../../entities/countdown";
 
 /**
@@ -61,6 +62,13 @@ export class AddCountdown {
     await this.repository.save(newCountdown);
 
     this.logger.info("New countdown item created succesfully");
+    
+    this.queue.publish(MESSAGE_PUBLISHED_TOPIC, JSON.stringify(newCountdown), {
+      version: "1",
+      companyId: "2",
+      collection: "countdown",
+      operation: MessageAttributeOperation.CREATE,
+    });
 
     return newCountdown;
   }
