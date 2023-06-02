@@ -7,4 +7,12 @@ export interface ICountdownRepository {
    * @param countdown - New Countdown to create
    */
   save(countdown: Countdown): Promise<void>;
+
+    /**
+   * Get all examples
+   *
+   * @return All examples
+   */
+
+  getAll(): Promise<Countdown[]>
 }
