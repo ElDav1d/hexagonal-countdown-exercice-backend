@@ -22,7 +22,7 @@ export class AddCountdown {
   @Inject(COUNTDOWN_REPOSITORY)
   private readonly repository: ICountdownRepository;
 
-  @Inject(USE_CASES_LOGGER.ADD_USE_CASE_LOGGER)
+  @Inject(USE_CASES_LOGGER.ADD_COUNTDOWN_USE_CASE_LOGGER)
   public readonly logger: ILogger;
 
   @Inject(ID_GENERATOR)
