@@ -20,4 +20,14 @@ export class MongoCountdownRepository implements ICountdownRepository {
       .collection<ICountdown>(this.COLLECTION)
       .insertOne(countdown);
   }
+
+  async getAll(): Promise<Countdown[]> {
+    this.logger.info("Retrieving all countdowns from the database");
+    const result = await this.client
+      .db()
+      .collection<ICountdown>(this.COLLECTION)
+      .find()
+      .toArray();
+    return result.map((document) => new Countdown(document));
+  }
 }

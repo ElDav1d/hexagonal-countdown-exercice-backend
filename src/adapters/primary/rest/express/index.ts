@@ -80,7 +80,8 @@ export class ExpressApi {
       .route("/examples/changeName/:id")
       .patch(this.authMiddleware.authenticate, exampleController.changeName);
 
-    router.route("/countdowns/").post(countdownController.addCountdown);
+    router.route("/countdowns/").post(countdownController.addCountdown)
+    .get(countdownController.getAllCountdowns);
 
     this.app.use(router);
   }
