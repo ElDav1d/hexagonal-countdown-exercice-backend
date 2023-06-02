@@ -16,13 +16,14 @@ export class GetAllCountdowns {
 
     @Inject(USE_CASES_LOGGER.GET_ALL_COUNTDOWNS_USE_CASE_LOGGER)
     public readonly logger: ILogger
-
+ 
     constructor(repository:ICountdownRepository, logger: ILogger ) {
         this.repository = repository
         this.logger = logger
     }
     
     async execute(): Promise<Countdown[]> {
-        return []
+        this.logger.info('Retrieving the countdowns')
+        return this.repository.getAll()
     }
 }
