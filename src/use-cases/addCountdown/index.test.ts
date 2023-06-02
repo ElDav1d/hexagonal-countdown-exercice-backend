@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import expect from "expect";
 import sinon, { SinonFakeTimers } from "sinon";
-import CountDownDataInJSON from "../../../__mocks__/countdown/addCountdown/countdown-data-in.json";
-import CountDownDataOutJSON from "../../../__mocks__/countdown/addCountdown/countdown-data-out.json";
+import CountdownDataInJSON from "../../../__mocks__/countdown/addCountdown/countdown-data-in.json";
+import CountdownDataOutJSON from "../../../__mocks__/countdown/addCountdown/countdown-data-out.json";
 import { AddCountdown } from ".";
 import { FakeIdGenerator } from "../../../__mocks__/ports/id-generator";
 import { FakeQueue } from "../../../__mocks__/ports/queue";
@@ -37,10 +37,10 @@ describe("addCountdown use-case", () => {
       new FakeQueue()
     );
 
-    const result = await addUseCase.execute(CountDownDataInJSON);
+    const result = await addUseCase.execute(CountdownDataInJSON);
 
     expect({ ...result }).toStrictEqual({
-      ...CountDownDataOutJSON,
+      ...CountdownDataOutJSON,
       date: now,
     });
   });

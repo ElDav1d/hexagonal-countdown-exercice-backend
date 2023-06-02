@@ -3,7 +3,7 @@ import { GetAllCountdowns } from '.'
 
 import sinon from 'sinon'
 
-import ExampleDataOutJSON from '../../../__mocks__/countdown/getAllCountdowns/countdown-data-out.json'
+import CountdownDataOutJSON from '../../../__mocks__/countdown/getAllCountdowns/countdown-data-out.json'
 import { FakeCountdownRepository } from '../../../__mocks__/repositories/countdown.repository'
 import { FakeLogger } from '../../../__mocks__/ports/logger'
 import { Countdown } from '../../entities/countdown'
@@ -18,7 +18,7 @@ describe('getAllCountdowns use-case', () => {
         
         sinon
             .stub(FakeCountdownRepository.prototype, 'getAll')
-            .resolves(ExampleDataOutJSON.map(countdown => new Countdown({...countdown, date: now})))
+            .resolves(CountdownDataOutJSON.map(countdown => new Countdown({...countdown, date: now})))
         sinon.stub(FakeLogger.prototype, 'info')
         
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,6 +26,6 @@ describe('getAllCountdowns use-case', () => {
         const countdowns = await getAllCountdownsUseCase.execute();
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        expect(countdowns.map((countdown: any) => ({...countdown}))).toStrictEqual(ExampleDataOutJSON.map(example => ({...example, date: now})))
+        expect(countdowns.map((countdown: any) => ({...countdown}))).toStrictEqual(CountdownDataOutJSON.map(example => ({...example, date: now})))
     })
 })
